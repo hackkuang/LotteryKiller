@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>Lottery Killer</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f6f7;
+    }
+
+    .blue {
+      color: cornflowerblue;
+      font-weight: bold;
+    }
+
+    .red {
+      color: red;
+      font-weight: bold;
+    }
+
+  </style>
+  <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+  <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+  <h1>杀号</h1>
+</div>
+<div class="table-responsive" id="table-cont">
+  <table class="table table-striped">
+    <thead class="table-head">
+    <tr>
+      <th>期号</th>
+      <th>红1</th>
+      <th>红2</th>
+      <th>红3</th>
+      <th>红4</th>
+      <th>红5</th>
+      <th>红6</th>
+      <th>蓝</th>
+      <th>杀号方法1</th>
+      <th>方法1结果</th>
+      <th>杀号方法2</th>
+      <th>方法2结果</th>
+      <th>杀号方法3</th>
+      <th>方法3结果</th>
+      <th>杀号方法4</th>
+      <th>方法4结果</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for result in killer %}
+      <tr>
+        {% for number in result %}
+          <td>{% if number is True %}
+            <span>&#10007</span>
+          {% elif number is False %}
+            <span>&#10003</span>
+          {% else %}
+            <span class="{% if forloop.counter == 8 %}blue
+                    {% elif forloop.counter == 1 %}period
+                    {% elif forloop.counter >= 2 and forloop.counter <= 7 %}red
+                    {% else %}kill-result
+                    {% endif %}">{{ number }}</span>
+          {% endif %}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br><br><br>
+<div>
+  <h1>尾数</h1>
+</div>
+<div class="table-responsive" id="table-cont">
+  <table class="table table-stripped">
+    <thead class="table-head">
+    <tr>
+      <th>期号</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+    </thead>
+    <tbody>{% for tail in tails %}
+      <tr>
+        {% for result in tail %}
+          <td>
+            {% if result != 0 %}
+              <span>{{ result }}</span>
+            {% elif forloop.first %}
+              <span>{{ result }}</span>
+            {% endif %}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}</tbody>
+  </table>
+</div>
+
+
+</body>
+</html>
