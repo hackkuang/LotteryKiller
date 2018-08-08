@@ -98,7 +98,7 @@ def process_tail(killnum_data):
     tail_exist = pd.DataFrame(tail_num.apply(map2times, axis=1).to_dict()).T
     tail_exist = tail_exist.reindex(index=killnum_data.index)
     tail_exist = tail_exist.reset_index()
-    return tail_exist
+    return tail_exist.iloc[2:, :]
 
 
 def process_results():

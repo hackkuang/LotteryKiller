@@ -106,5 +106,5 @@ def scrape_after_deploy():
         'endPeriod': 2018090
     }
     html = get_html(payloads=interval)
-    data = parse_html(html, latest=True)
+    data = parse_html(html, latest=False)
     store(data)
